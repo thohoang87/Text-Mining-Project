@@ -1,0 +1,32 @@
+version: "3.8"
+services:
+
+  db_mongo:
+    image: "mongo:6.0.3"
+    container_name: mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_DATABASE=auth
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+    networks:
+      - mongo-compose-network
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./data:/data/db
+  
+  streamlit:
+    build: ./
+    container_name: streamlit-app
+    environment:
+    - DB_SERVER=db_mongo
+    ports:
+      - "8501:8501"
+    links: db_mongo
+    networks:
+      - mongo-compose-networks
+  
+networks:
+  mongo-compose-network:
+    driver: bridge
+
