@@ -5,12 +5,10 @@
 
 
 
-
-from scrap import *
-from connect import *
+from db_scrap.scrap import *
+from db_scrap.connect import *
 from multiprocessing import *
 import time
-from agent import *
 
 
 
@@ -62,7 +60,7 @@ def main(url):
 
 
 
-if __name__ == '__main__':
+def load_db():
     p = Pool()
     p.map(main, urlsParc)
     p.close()

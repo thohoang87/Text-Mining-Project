@@ -5,15 +5,13 @@
 ####################################################
 
 
-
 import requests
 from bs4 import BeautifulSoup
 import re
 from datetime import timedelta
-from date import trait_date
+from db_scrap.date import trait_date
 from datetime import date
 import locale
-from fake_useragent import UserAgent
 
 # changement de la date et l'heure en FR
 locale.setlocale(locale.LC_TIME,'fr_FR.utf8')
