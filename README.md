@@ -2,13 +2,13 @@
 
 ## Vérifier que docker compose est installé
 
-<pre><code>docker-compose -v<\pre><\code>
+<pre><code>docker-compose -v<\code><\pre>
 
 ## Cloner le repo et créer les containers
 
 <pre><code> git clone https://github.com/PierreDubrulle/scrap.git\
 cd scrap\
-docker compose up -d<\pre><\code>
+docker compose up -d<\code><\pre>
 
 ## Services
 <p>Pour chaque service recopier le lien correspondant dans un navigateur<\p>
