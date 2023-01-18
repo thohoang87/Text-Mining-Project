@@ -1,6 +1,4 @@
 import streamlit as st
-import time
-import sys
 from fonctions.connection_bdd import statistics
 
 

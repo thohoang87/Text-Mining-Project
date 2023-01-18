@@ -31,39 +31,44 @@ def main(url):
         avis = scrap_hotel(url)
         while(True):
             i += 10
+
+            if i == 1000:
+                time.sleep(5)
             new_url = url[:url.find('Reviews')+len('Reviews')]+'-or'+str(i)+url[url.find('Reviews')+len('Reviews'):]
             a = write_db(avis)
             try:
-                time.sleep(1)
                 avis = scrap_hotel(new_url)
             except:
-                print(new_url)
                 break
-            if a== 0 or len(avis) == 0:
-                print(f'zéro avis:\t{new_url}')
-                break
+            if a == 0:
+                return "La base de données est à jour !"
+                
+            elif len(avis) == 0:
+                return "Plus d'avis à récupérer ..."
     else:
         avis = scrap_parc(url)
         while(True):
             i += 10
+            if i == 1000:
+                time.sleep(5)
             new_url = url[:url.find('Reviews')+len('Reviews')]+'-or'+str(i)+url[url.find('Reviews')+len('Reviews'):]
             a = write_db(avis)
             try:
-                time.sleep(1)
                 avis = scrap_parc(new_url)
             except:
-                print(f'{new_url} ne répond pas')
                 break
-            if a == 0 or len(avis) == 0:
-                print(f'zéro avis:\t{new_url}')
-                break
-
+            if a == 0:
+                return "La base de données est à jour !"
+                
+            elif len(avis) == 0:
+                return "Plus d'avis à récupérer ..."
 
 
 def load_db():
+    result=[]
     p = Pool()
-    p.map(main, urlsParc)
+    result.append(p.map(main, urlsParc))
     p.close()
     p.join()
-
+    return result
 

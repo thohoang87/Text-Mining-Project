@@ -10,5 +10,6 @@ st.title("Hello")
 st.markdown('Page principale')
 st.sidebar.markdown('Page principale')
 
-if st.button('Say hello'):
-    load_db()
+if st.button('Recharger la base de données'):
+    result = load_db()
+    st.write(result[0][0])
