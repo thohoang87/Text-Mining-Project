@@ -227,7 +227,7 @@ def get_urls_hotel(contents):
             else:
                 photo = False
 
-            dict_avis[i] = {'Type':'Parc',
+            dict_avis[i] = {'Type':'Hotel',
                             'Site':site,
                             'Auteur':name,
                             'Localisation':situation,
