@@ -1,4 +1,4 @@
-import aiohttp, asyncio, cchardet, re
+import aiohttp, asyncio, cchardet, re, streamlit as st
 from bs4 import BeautifulSoup
 from multiprocessing import *
 import locale
@@ -242,7 +242,7 @@ def get_urls_hotel(contents):
     return avis, links
 
 def mongo(avis):
-    client = MongoClient("mongo", port=27017)
+    client = MongoClient("mongodb:27017")
     db = client['disney']
     collection = db['Tripadvisor']
     for x in avis:
@@ -254,7 +254,7 @@ def mongo(avis):
 
 
 
-
+@st.experimental_singleton
 def run():
 
 
@@ -290,8 +290,9 @@ def run():
             avis_hotel = mongo(data_hotel)
         count += 1
         if (avis_hotel == 1 and avis_parc == 1):
+            resultat = 1
             break
-
-
-
+        else:
+            resultat = 0
+    return resultat
 

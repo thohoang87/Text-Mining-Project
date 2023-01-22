@@ -26,8 +26,11 @@ with st.container():
     with col2:
         reload = st.button('Mettre à jour la base données')  
         if reload:
-            run()
-
+            maj = run()
+            if maj == 1:
+                st.warning('La base est déjà à jour !')
+            else:
+                st.warning('De nouveaux avis ont été importés !')
         for x in total_site:
             st.write(f"{x['_id']} : {x['count']}")
 
