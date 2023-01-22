@@ -11,6 +11,8 @@ services:
     ports:
       - "27017:27017"
     restart: unless-stopped
+    volumes:
+      - ./data:/data_db_disney
   
   data:
     build: ./mongo-seed
