@@ -3,10 +3,8 @@ from bs4 import BeautifulSoup
 from multiprocessing import *
 import locale
 from datetime import *
-import time
 from pymongo import MongoClient
-from concurrent.futures import ProcessPoolExecutor
-from multiprocessing import cpu_count
+
 locale.setlocale(locale.LC_TIME,'fr_FR.utf8')
 
 dict_mois = {'janv.':'janvier', 'février':'fevrier', 'fev.':'fevrier', 'avr.':'avril', 'juil.':'juillet', 'août':'aout', 'sept.':'septembre','oct.':'octobre', 'nov.':'novembre', 'déc.':'decembre','décembre':'decembre', 'Dec':'decembre'}
@@ -100,7 +98,8 @@ def get_urls_parc(contents):
             except:
                 type_voyage=None
             try:
-                date_comm = re.search(r'\d+ .+ \d+',x.find(attrs={'class':'biGQs _P pZUbB ncFvv osNWb'}).text).group(0)
+                date_comm = (x.find(attrs={'class':'TreSq'}).find(attrs={'class':'biGQs _P pZUbB ncFvv osNWb'})).text
+                date_comm = re.search(r'\d+ .* \d+', date_comm).group(0)
                 if date_comm == 'Hier':
                     date_comm = str((today - timedelta(days = 1)).strftime("%d %b %Y"))
                 elif date_comm == "Aujourd'hui":
@@ -245,7 +244,7 @@ def get_urls_hotel(contents):
 def mongo(avis):
     client = MongoClient("mongodb://root:root@localhost:27017/")
     db = client['disney']
-    collection = db['disney']
+    collection = db['Tripadvisor']
     for x in avis:
         for y in range(len(x)):
             avis_exists = collection.find_one({'Commentaire': x[y+1]['Commentaire'], 'Auteur':x[y+1]['Auteur'], 'Date_commentaire':x[y+1]['Date_commentaire']})
@@ -290,6 +289,8 @@ if __name__ == '__main__':
             data_hotel, links_hotel = get_urls_hotel(results_hotel)
             avis_hotel = mongo(data_hotel)
         count += 1
+        if (avis_hotel == 1 and avis_parc == 1):
+            break
 
 
 
