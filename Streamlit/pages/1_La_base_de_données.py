@@ -1,5 +1,6 @@
 import streamlit as st
 from fonctions.connection_bdd import statistics
+from fonctions.async_scrap import *
 from PIL import Image
 
 
@@ -16,14 +17,17 @@ div.stButton > button:first-child {
 st.markdown('# Mise à jour de la base de données')
 
 total, total_site, some_comments, year = statistics()
-icon = Image.open('../base-de-donnees.png')
+icon = Image.open('./base-de-donnees.png')
 with st.container():
     col1, col2 = st.columns(2)
     with col1:
         st.image(icon)
         # st.write(f'Il y a actuellement : {total} commentaires dans la base de données.')
     with col2:
-        st.button('Mettre à jour la base données')  
+        reload = st.button('Mettre à jour la base données')  
+        if reload:
+            run()
+
         for x in total_site:
             st.write(f"{x['_id']} : {x['count']}")
 
