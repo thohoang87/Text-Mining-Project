@@ -81,7 +81,7 @@ if selected_year and selected_option=='Commentaires':
     Z_hotel = matrice_lien(corpus_nettoye,words_hotel)
     #st.button("Re-run")
     
-    number = st.number_input("Entrez un seuil :", min_value=5, max_value=200, step=1, format="%d", value=10)
+    number = st.number_input("Entrez un seuil :", min_value=0.1, max_value=200, step=0.1, format="%d", value=0.7)
     
     st.markdown("## le dendrogramme")
     #afficher le dendrogramme
