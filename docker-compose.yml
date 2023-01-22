@@ -29,13 +29,16 @@ services:
     ports:
       - "6082:8081"
 
+
   web:
     build: ./Streamlit
     container_name: streamlit
+    environment:
+      - MONGO_URI=mongodb://db:27017
     ports:
       - "8501:8501"
-    links:
-      - db
     depends_on:
       - db
     restart: unless-stopped
+
+

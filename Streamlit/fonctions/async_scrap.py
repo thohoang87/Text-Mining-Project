@@ -242,7 +242,7 @@ def get_urls_hotel(contents):
     return avis, links
 
 def mongo(avis):
-    client = MongoClient("mongodb:27017")
+    client = MongoClient("mongodb://db:27017")
     db = client['disney']
     collection = db['Tripadvisor']
     for x in avis:

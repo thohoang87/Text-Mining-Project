@@ -8,7 +8,7 @@ import re
 @st.experimental_singleton
 def get_connection():
     # connection à la base de donnée en local
-    client = MongoClient("mongodb", port=27017)
+    client = MongoClient("mongodb://db:27017")
     # connection à la db
     db_name = client["disney"]
     # connection à la collection
