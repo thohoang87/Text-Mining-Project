@@ -29,9 +29,11 @@ Pour pouvoir accéder à ces différentes ressources, il faut installer Docker e
 <pre><code> git clone https://github.com/PierreDubrulle/scrap.git && cd scrap && docker compose up -d</code></pre>
 
 # Services
-<p>Pour chaque service recopier le lien correspondant dans un navigateur</p>
-<p>mongo-express => locahost:6082
-   streamlit => localhost:8501</p>
+Pour chaque service recopier le lien correspondant dans un navigateur:
+
+<p>mongo-express => locahost:6082<p>
+   
+<p>streamlit => localhost:8501</p>
    
    
 # PS : Vérifier que docker-desktop est lancé. Si ce n'est pas le cas, ouvir l'application
